@@ -1,0 +1,75 @@
+{
+  "name": "webpack-demo-vue",
+  "version": "1.0.0",
+  "description": "test",
+  "private": true,
+  "sideEffects": false,
+  "scripts": {
+    "start": "webpack-dev-server --open --config build/webpack.dev.js",
+    "build": "webpack --config build/webpack.prod.js",
+    "server": "node build/server.js"
+  },
+  "keywords": [],
+  "author": "z",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@vue/babel-preset-app": "^4.3.1",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-dynamic-import-webpack": "^1.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.5.2",
+    "csv-loader": "^3.0.2",
+    "eslint": "^4.19.1",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^4.0.0",
+    "express": "^4.17.1",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.2.0",
+    "imports-loader": "^0.8.0",
+    "jquery": "^3.5.0",
+    "style-loader": "^1.1.4",
+    "uglify-es": "^3.3.9",
+    "vue": "^2.6.11",
+    "vue-loader": "^15.9.1",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-dev-server": "^3.10.3",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-merge": "^4.2.2",
+    "xml-loader": "^1.2.1"
+  },
+  "dependencies": {
+    "98.css": "^0.1.11",
+    "axios": "^0.19.2",
+    "cesium": "^1.69.0",
+    "font-awesome-webpack": "0.0.5-beta.2",
+    "less-loader": "^6.0.0",
+    "lodash": "^4.17.15",
+    "nes.css": "^2.3.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "url-loader": "^4.1.0",
+    "vue-router": "^3.1.6",
+    "vuex": "^3.3.0"
+  },
+  "main": ".eslintrc.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/13391970870/webpack-demo-vue.git"
+  },
+  "bugs": {
+    "url": "https://github.com/13391970870/webpack-demo-vue/issues"
+  },
+  "homepage": "https://github.com/13391970870/webpack-demo-vue#readme"
+}
