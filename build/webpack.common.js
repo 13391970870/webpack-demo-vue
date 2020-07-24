@@ -1,11 +1,22 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const DeadCodePlugin = require('webpack-deadcode-plugin');
+const webpack = require('webpack');
+
+function resolve(dir) {
+  return path.join(__dirname, '..', dir)
+}
+
+
 module.exports = {
   entry: {
     app: './src/renderer/index.js',
+  },
+  optimization: {
+    usedExports: true,
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -24,6 +35,25 @@ module.exports = {
     new webpack.ProvidePlugin({
       join: ['lodash', 'join'],
       'Vue': 'vue'
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: path.join('node_modules/cesium/Build/Cesium', 'Workers'), to: 'Workers' },
+        { from: path.join('node_modules/cesium/Source', 'Assets'), to: 'Assets' },
+        { from: path.join('node_modules/cesium/Source', 'Widgets'), to: 'Widgets' },
+        { from: path.join('public'), to: 'public' }
+      ]
+    }),
+    new webpack.DefinePlugin({
+      CESIUM_BASE_URL: JSON.stringify('')
+    }),
+    new DeadCodePlugin({
+      patterns: [
+        'src/**/*.(js|jsx|css)',
+      ],
+      exclude: [
+        '**/*.(stories|spec).(js|jsx)',
+      ],
     })
   ],
   resolve: {
@@ -31,11 +61,16 @@ module.exports = {
     alias: {
       '@': path.join(__dirname, '../src/renderer'),
       '@@': path.join(__dirname, '../public'),
-      vue$: "vue/dist/vue.esm.js"
+      vue$: "vue/dist/vue.esm.js",
+      'cesium': path.join(__dirname, '../node_modules/cesium'),
     }
   },
   module: {
+    unknownContextCritical: false,
     rules: [{
+        test: /\.html$/,
+        use: 'vue-html-loader'
+      }, {
         test: /\.vue$/,
         loader: 'vue-loader'
       }, {
@@ -48,22 +83,12 @@ module.exports = {
           }
         }
       }, {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'vue-style-loader',
-          'css-loader',
-        ]
+        test: /\.less$/,
+        use: ['vue-style-loader', 'css-loader', 'less-loader']
       },
       {
-        test: /\.less$/,
-        use: [{
-          loader: "style-loader" // creates style nodes from JS strings
-        }, {
-          loader: "css-loader" // translates CSS into CommonJS
-        }, {
-          loader: "less-loader" // compiles Less to CSS
-        }]
+        test: /\.css$/,
+        use: ['vue-style-loader', 'css-loader']
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
@@ -97,13 +122,16 @@ module.exports = {
         use: 'exports-loader?file,parse=helpers.parse'
       },
       {
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        enforce: 'pre',
-        include: [path.resolve(__dirname, 'src')],
-        options: {
-          formatter: require('eslint-friendly-formatter')
-        }
+        test: /\.js$/,
+        use: [{
+          loader: 'eslint-loader',
+          options: { // 这里的配置项参数将会被传递到 eslint 的 CLIEngine 
+            formatter: require('eslint-friendly-formatter') // 指定错误报告的格式规范
+          }
+        }],
+        enforce: "pre", // 编译前检查
+        exclude: /node_modules/, // 不检测的文件
+        include: [path.resolve(__dirname, 'src')], // 指定检查的目录
       }
     ]
   },

@@ -5,6 +5,7 @@ const webpackHotMiddleware = require("webpack-Hot-middleware")
 const path = require('path');
 
 const app = express();
+const router = express.Router();
 const config = require('./webpack.dev.js');
 const compiler = webpack(config);
 const hotMiddleWare = require("webpack-hot-middleware")(compiler);
@@ -31,6 +32,9 @@ app.all('*', (req, res, next) => {
   next()
 })
 
+
+
+
 app.get(api, (req, res) => {
   console.log('=====')
   console.log(req)
@@ -40,8 +44,10 @@ app.get(api, (req, res) => {
 
 });
 
+
+
 app.set('port', '3000');
-app.set('host','192.168.1.180');
+app.set('host', '192.168.1.180');
 
 
 app.use('/public', express.static('public'))

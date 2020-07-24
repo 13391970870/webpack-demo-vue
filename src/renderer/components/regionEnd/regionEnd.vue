@@ -1,14 +1,6 @@
 <template>
   <div class="region-end">
     <div class="window">
-      <div class="title-bar">
-        <div class="title-bar-text">A Window With Stuff In It</div>
-        <div class="title-bar-controls">
-          <button aria-label="Minimize"></button>
-          <button aria-label="Maximize"></button>
-          <button aria-label="Close"></button>
-        </div>
-      </div>
       <div class="window-body">
         <ul class="tree-view">
           <li v-for="item in listArr">
@@ -40,6 +32,12 @@ export default {
           type: 'testServer',
         }, {
           type: 'algorithm',
+        }, {
+          type: 'cesium',
+        }, {
+          type: 'subPage',
+        }, {
+          type: 'htmlModel',
         }],
       }]
     }
@@ -62,6 +60,7 @@ export default {
   right: 0px;
   height: calc(100% - 20px);
   width: 300px;
+  top:12px;
 
   .window {
     width: 300px;

@@ -1,14 +1,6 @@
 <template>
   <div class="main-box">
     <div class="window">
-      <div class="title-bar">
-        <div class="title-bar-text">A Window With Stuff In It</div>
-        <div class="title-bar-controls">
-          <button aria-label="Minimize"></button>
-          <button aria-label="Maximize"></button>
-          <button aria-label="Close"></button>
-        </div>
-      </div>
       <div class="window-body">
         <router-view></router-view>
       </div>
@@ -37,7 +29,7 @@ export default {
   },
   methods: {
   },
-  mounted() {
+  mounted() { 
     let _this = this;
     this.$root.Bus.$on("choosePos",function(val){
       _this.$router.push({ name: val })
@@ -60,6 +52,10 @@ export default {
     height: 100%;
     width: 100%;
     position: absolute;
+    .window-body{
+      width:100%;
+      height: calc(100% - 36px);
+    }
 
     .window-body-model {
       margin: 20px;

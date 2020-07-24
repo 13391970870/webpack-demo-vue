@@ -1,8 +1,8 @@
 <template>
     <div class="main-page">
-        <mainBox></mainBox>
         <topBar></topBar>
         <regionEnd></regionEnd>
+        <router-view></router-view>
         <div id="result" alt="text"></div>
     </div>
 </template>

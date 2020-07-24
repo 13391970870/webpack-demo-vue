@@ -3,5 +3,8 @@
     "regular": "正则表达式",
     "prototype": "原型链",
     "testServer": "测试服务",
-    "algorithm": "算法"
+    "algorithm": "算法",
+    "cesium":"地图",
+    "subPage": "子页面",
+    "htmlModel": "模板测试"
 } 

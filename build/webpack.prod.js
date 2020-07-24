@@ -4,13 +4,16 @@ const common = require('./webpack.common.js');
 const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin'); //压缩代码插件
 
+const UselessFile = require('useless-files-webpack-plugin')
+
 /*就是babel-loader先去处理js文件，处理过后，webpack进行打包处理，最后uglifyjs进行代码压缩。而关键就是babel怎么去处理js文件*/
 
 
 module.exports = merge(common, {
   entry: {
-    app: './src/renderer/index.js',/*
-    cesium: './public/plugins/Cesium.js'*/
+    app: './src/renderer/index.js',
+    /*
+        cesium: './public/plugins/Cesium.js'*/
   },
   //多个入口之间同时使用某个依赖则生效
   optimization: {
@@ -41,6 +44,12 @@ module.exports = merge(common, {
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
     new webpack.HashedModuleIdsPlugin(),
+    new UselessFile({
+      root: './src', // 项目目录
+      out: './fileList.json', // 输出文件列表
+      clean: false, // 删除文件,
+      exclude: path // 排除文件列表, 格式为文件路径数组
+    })
   ],
   output: {
     filename: '[name].[chunkhash].bundle.js',

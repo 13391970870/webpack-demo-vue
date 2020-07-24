@@ -28,12 +28,12 @@ module.exports = merge(common, {
     hot: true,
     host: 'localhost',
     port: '8080',
-    useEslint: false,
+    useEslint: true,
   }, //提供了一个简单的 web 服务器，并且能够实时重新加载
   output: {
-    filename: '[name].bundle.js',
+    filename: path.posix.join('static','[name].[hash].js'),
     path: path.resolve(__dirname, 'dist'),
-    publicPath: 'http://192.168.1.180:3000/'
+    publicPath: '/'
   },
   mode: "development",
 })

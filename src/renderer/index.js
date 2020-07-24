@@ -5,13 +5,16 @@ import store from './store'
 import less from 'less'
 import build from '@/api/filter.js'
 
-import '@/style/font.less';
+import './style/font.less';
 import "98.css";
-import '@/style/index.less';
+import './style/index.less';
 
-import buildViewer from '@/api/global.js'
+import buildViewer from './api/global.js'
 
-import { eventBusPlugin } from '@/api/event.js';
+import { eventBusPlugin } from '@/api/event.js';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+
+import 'cesium/Build/Cesium/Widgets/widgets.css'
+
 
 Vue.use(eventBusPlugin);//使用封装的event.js
 Vue.use(less)

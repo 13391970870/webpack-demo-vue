@@ -1,4 +1,7 @@
 let VIEWER
-export default {
-  VIEWER
+
+
+export default function test() {
+  Symbol.for('foo')
+  return VIEWER;
 }
